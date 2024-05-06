@@ -1,4 +1,6 @@
-@extends('layouts.app')
+
+@extends('admin.layout.app')
+
 
 @section('content')
     <style>
@@ -55,14 +57,7 @@
                         </div>
                         <div class="p-4 text-black" style="background-color: #f8f9fa;">
                             <div class="d-flex justify-content-end text-center py-1">
-                                <div>
-                                    <p class="mb-1 h5">253</p>
-                                    <p class="small text-muted mb-0">Photos</p>
-                                </div>
-                                <div class="px-3">
-                                    <p class="mb-1 h5">1026</p>
-                                    <p class="small text-muted mb-0">Videos</p>
-                                </div>
+                             
                                 {{-- <div>
                   <p class="mb-1 h5">478</p>
                   <p class="small text-muted mb-0">Following</p>
@@ -131,8 +126,7 @@
 
                                 <div class="col mb-2">
                                     <video src="{{ $user->video }}" class="w-100 rounded-3" controls></video>
-                                    {{-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(112).webp"
-                    alt="image 1" > --}}
+                                  
                                 </div>
                                 <div class="col mb-2">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
