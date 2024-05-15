@@ -7,6 +7,8 @@ use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\Auth\UserDetailController;
 use App\Http\Controllers\WriterController;
+use App\Http\Controllers\Script\ScriptController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,6 +25,23 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('scenes', function () {
+    return view('writer.script_scenes');
+});
+Route::get('script', function () {
+    return view('writer.script');
+});
+
+
+Route::post('/scripts', [ScriptController::class, 'store'])->name('scripts.store');
+Route::post('/scripts/{script}/scenes', [ScriptController::class, 'addScene'])->name('scripts.scenes.add');
+
+
+Route::get('view/script', [ScriptController::class, 'Script_show'])->name('scripts.view');
+Route::get('script/show/{id}', [ScriptController::class, 'single_Script'])->name('scripts.show');
+
+
 
 Auth::routes();
 

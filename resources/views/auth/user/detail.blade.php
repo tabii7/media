@@ -97,8 +97,7 @@
                                         <p class="profile-detail-title fw-bold mb-2 mx-1 mx-md-3 mt-2 text-center">Profile
                                             Detail</p>
 
-                                        <form method="POST" action="{{ route('user.\
-                                        .store') }}"
+                                        <form method="POST" action="{{ route('user.detail.store') }}"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="row mb-2 mt-3">
