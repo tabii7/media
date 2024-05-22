@@ -41,6 +41,9 @@ Route::post('/scripts/{script}/scenes', [ScriptController::class, 'addScene'])->
 Route::get('view/script', [ScriptController::class, 'Script_show'])->name('scripts.view');
 Route::get('script/show/{id}', [ScriptController::class, 'single_Script'])->name('scripts.show');
 
+Route::get('script/edit/{id}', [ScriptController::class, 'edit_Script'])->name('scripts.edit');
+Route::post('script/update/{id}', [ScriptController::class, 'update_Script'])->name('script.update');
+Route::post('scene/edit/{id}', [ScriptController::class, 'update_Script'])->name('edit.scene');
 
 
 Auth::routes();

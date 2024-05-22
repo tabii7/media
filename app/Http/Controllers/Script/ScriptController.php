@@ -74,4 +74,20 @@ public function single_Script($id){
     return view('writer.view_script_detail', compact('script','scenes'));
 }
 
+
+public function edit_Script($id){
+
+    $script = Script::where('id', $id)->get()->first();
+    $scene = Scene::where('script_id',$id);
+    return view('writer.edit_script', compact('script','scene'));
+
+}
+
+public function update_Script(Request $request){
+    $script = Script::find($request->id);
+  
+    return redirect()->route('writer.view_script');
+
+}
+
 }

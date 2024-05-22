@@ -74,20 +74,24 @@
         <p>Created: {{ $script->created_at->format('M d, Y') }}</p>
         
         <h2>Scenes</h2>
+        <?php  $i = 1; ?>
+
         @foreach($scenes as $scene)
             <div class="scene">
-                <h2>Scene</h2>
+                <h2>Scene{{$i}} </h2>
 
+            <?php   $i = $i++ ; ?>
+            <a href="{{route('edit.scene', ['id' => $scene->id] )}}" class="btn btn-primary"> Edit Scene</a>
           <div>
           {!! $scene->scene !!}
 
                 </div>
                 
-                <div class="actors-props">
+                    <div class="actors-props">
                     <h3>Actors</h3>
                     <ul>
                     @foreach(explode(',', $scene->actors) as $actor)
-                        <li>{{ $actor }}</li>
+                    <li>{{ $actor }}</li>
                     @endforeach
 
                     </ul>
