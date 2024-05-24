@@ -44,9 +44,11 @@
                 border-right: 0;
                 border-radius: 0;
             }
+
             .profile-form-container input[type="text"].form-control:focus {
-                border-bottom-color: transparent; /* Set bottom border color to transparent */
-                box-shadow: none; 
+                border-bottom-color: transparent;
+                /* Set bottom border color to transparent */
+                box-shadow: none;
                 border-bottom: 1px solid rgb(224, 191, 191);
             }
 
@@ -55,7 +57,13 @@
                 border: 0;
             }
 
-            
+            .hidden {
+                display: none;
+            }
+
+            .visible {
+                display: block;
+            }
         </style>
 
         <section class="profile-form-container">
@@ -71,7 +79,7 @@
                                         <p class="select-profile-title fw-bold mb-3 mx-1 mx-md-3 mt-2 text-center">Select
                                             Profile</p>
 
-                                           
+
                                         @foreach ($roles as $r)
                                             <div class="col-md-3 select-profile-card">
                                                 <div class="card">
@@ -82,9 +90,9 @@
                                                         <p class="card-text">Start your career as {{ $r->name }}</p>
                                                     </div>
                                                     <div class="d-grid">
-                                                        <!-- <a href="{{route('actor.create')}}" class="btn btn-outline-info">continue</a> -->
-                                                         <button class="btn btn-outline-info roles" type="button"
-                                                            data-select-profile="{{ $r->name }}">Continue</button> 
+                                                        <!-- <a href="{{ route('actor.create') }}" class="btn btn-outline-info">continue</a> -->
+                                                        <button class="btn btn-outline-info roles" type="button"
+                                                            data-select-profile="{{ $r->name }}">Continue</button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -92,7 +100,8 @@
                                     </div>
                                     {{-- select role end --}}
                                     {{-- form --}}
-                                    <div class="col-md-10 col-lg-6 col-xl-8 profile_form" style="display: none">
+                                    <div class="col-md-10 col-lg-6 col-xl-8 actor_profile profile_section hidden"
+                                        data-role="actor">
 
                                         <p class="profile-detail-title fw-bold mb-2 mx-1 mx-md-3 mt-2 text-center">Profile
                                             Detail</p>
@@ -138,18 +147,21 @@
                                                 <div class="col-md-10 m-auto">
                                                     <label for="gender"
                                                         class="col-form-label ">{{ __('Gender') }}</label>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio1" value="male" required>
-                                                            <label class="form-check-label" for="inlineRadio1">Male</label>
-                                                          </div>
-                                                          <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio2" value="female" required>
-                                                            <label class="form-check-label" for="inlineRadio2">Female</label>
-                                                          </div>
-                                                          <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="gender" id="inlineRadio3" value="others" required>
-                                                            <label class="form-check-label" for="inlineRadio3">Others<label>
-                                                          </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="gender"
+                                                            id="inlineRadio1" value="male" required>
+                                                        <label class="form-check-label" for="inlineRadio1">Male</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="gender"
+                                                            id="inlineRadio2" value="female" required>
+                                                        <label class="form-check-label" for="inlineRadio2">Female</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio" name="gender"
+                                                            id="inlineRadio3" value="others" required>
+                                                        <label class="form-check-label" for="inlineRadio3">Others<label>
+                                                    </div>
 
                                                     @error('gender')
                                                         <span class="invalid-feedback" role="alert">
@@ -333,14 +345,18 @@
                                                 <div class="col-md-10 m-auto">
                                                     <label for="relationship_status"
                                                         class="col-form-label ">{{ __('Relationship Status') }}</label>
-                                                        <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="relationship_status" id="inlineRadio4" value="married" required>
-                                                            <label class="form-check-label" for="inlineRadio4">Married</label>
-                                                          </div>
-                                                          <div class="form-check form-check-inline">
-                                                            <input class="form-check-input" type="radio" name="relationship_status" id="inlineRadio5" value="single" required>
-                                                            <label class="form-check-label" for="inlineRadio5">Single</label>
-                                                          </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="relationship_status" id="inlineRadio4" value="married"
+                                                            required>
+                                                        <label class="form-check-label" for="inlineRadio4">Married</label>
+                                                    </div>
+                                                    <div class="form-check form-check-inline">
+                                                        <input class="form-check-input" type="radio"
+                                                            name="relationship_status" id="inlineRadio5" value="single"
+                                                            required>
+                                                        <label class="form-check-label" for="inlineRadio5">Single</label>
+                                                    </div>
 
                                                     @error('relationship_status')
                                                         <span class="invalid-feedback" role="alert">
@@ -457,7 +473,9 @@
                                                 <div class=" col-md-10 m-auto">
                                                     <div class="d-flex justify-content-end">
 
-                                                        <button type="submit" class="btn btn-outline-success rounded-pill ">Continue </button>
+                                                        <button type="submit"
+                                                            class="btn btn-outline-success rounded-pill ">Continue
+                                                        </button>
                                                     </div>
                                                 </div>
                                             </div>
@@ -467,13 +485,24 @@
                                         </form>
 
                                     </div>
+                                    
+                                    <div class="col-md-10 col-lg-6 col-xl-8 user_profile profile_section hidden"
+                                        data-role="user">
+                                        <h1>user profile will here</h1>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                    </div>
+
+                                    <div class="col-md-10 col-lg-6 col-xl-8 write_profile profile_section hidden"
+                                        data-role="writer">
+                                        <h1>writer profile will here</h1>
+                                      
+                                    </div>
+
+                                    <div class="col-md-10 col-lg-6 col-xl-8 vendor_profile profile_section hidden"
+                                        data-role="vendor">
+                                        <h1>vendor profile will here</h1>
+
+                                    </div>
         </section>
     @endsection
 
@@ -487,14 +516,20 @@
 
 
             $(document).ready(function() {
+
                 $('.roles').click(function(e) {
                     e.preventDefault();
                     var role = $(this).attr('data-select-profile');
                     $('#user_type').val(role);
                     $('#select_profile').hide(500);
-                    $('.profile_form').show(500);
-                    console.log('selected role:', role);
 
+                    // Hide all profile sections first by removing the 'visible' class and adding the 'hidden' class
+                    $('.profile_section').removeClass('visible').addClass('hidden');
+
+                    // Show the selected profile section by removing the 'hidden' class and adding the 'visible' class
+                    $('.profile_section[data-role="' + role + '"]').removeClass('hidden').addClass('visible');
+
+                    console.log('Selected role:', role);
                 });
                 // $('#user_type').on('change', function() {
                 //     // Get the selected option value
