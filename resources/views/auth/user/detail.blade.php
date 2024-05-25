@@ -101,7 +101,7 @@
                                     {{-- select role end --}}
                                     {{-- form --}}
                                     <div class="col-md-10 col-lg-6 col-xl-8 actor_profile profile_section hidden"
-                                        data-role="actor">
+                                        data-role="model">
 
                                         <p class="profile-detail-title fw-bold mb-2 mx-1 mx-md-3 mt-2 text-center">Profile
                                             Detail</p>
