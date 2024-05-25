@@ -17,7 +17,7 @@ class UserDetailController extends Controller
     public function create()
     {
         $user= Auth()->user();
-        $roles=Role::whereNotIn('name',['admin'])->get();
+        $roles = Role::whereNotIn('name', ['admin', 'user'])->get();
         
         return view('auth.user.detail',compact('user','roles'));
     }
