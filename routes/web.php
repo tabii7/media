@@ -43,7 +43,10 @@ Route::get('script/show/{id}', [ScriptController::class, 'single_Script'])->name
 
 Route::get('script/edit/{id}', [ScriptController::class, 'edit_Script'])->name('scripts.edit');
 Route::post('script/update/{id}', [ScriptController::class, 'update_Script'])->name('script.update');
-Route::post('scene/edit/{id}', [ScriptController::class, 'update_Script'])->name('edit.scene');
+Route::get('/scripts/{script}/scenes/{scene}/edit', [ScriptController::class, 'edit_scene'])->name('edit.scene');
+Route::post('/scripts/{script}/scenes/{scene}', [ScriptController::class, 'update'])->name('scenes.update');
+Route::delete('/scenes/{scene}', [SceneController::class, 'destroy'])->name('delete.scene');
+
 
 
 Auth::routes();
