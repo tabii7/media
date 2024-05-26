@@ -8,6 +8,7 @@ use App\Http\Controllers\ExperienceController;
 use App\Http\Controllers\Auth\UserDetailController;
 use App\Http\Controllers\WriterController;
 use App\Http\Controllers\Script\ScriptController;
+use App\Http\Controllers\VendorController;
 
 use Illuminate\Support\Facades\Route;
 
@@ -80,4 +81,9 @@ Route::middleware(['auth.basic'])->group(function () {
     
     Route::get('writer/create',[WriterController::class,'create'])->name('writer.create');
     Route::post('writer/store',[WriterController::class,'store'])->name('writer.store');
+
+
+    // routes for vendor
+
+    Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');
 });

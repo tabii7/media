@@ -649,7 +649,7 @@
                                         <p class="profile-detail-title fw-bold mb-2 mx-1 mx-md-3 mt-2 text-center">Profile
                                             Detail</p>
                                             
-                                        <form method="POST"  enctype="multipart/form-data">
+                                        <form method="POST" action="{{ route('vendor.store') }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="row mb-2 mt-3">
                                                 <div class="col-md-10 m-auto">
