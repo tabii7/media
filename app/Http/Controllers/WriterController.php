@@ -89,10 +89,14 @@ class WriterController extends Controller
         $portfolioImages = [];
         if ($request->hasFile('portfolio')) {
             foreach ($request->file('portfolio') as $image) {
-                $imagePath = $image->store('images/writer', 'public');
+                $imageName = $image->getClientOriginalName();
+                $imagePath = 'images/writer/' . $imageName;
+                $image->move(public_path('images/writer'), $imageName);
                 $portfolioImages[] = $imagePath;
+                
             }
         }
+    
 
         $writer = Writer::create([
             'user_id' => Auth::id(),
