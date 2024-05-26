@@ -13,13 +13,15 @@ class UserDetailController extends Controller
     {
         $this->middleware('auth');
     }
+    /// method to render multiple roles so user can choose
     public function create()
     {
         $user= Auth()->user();
-        $roles=Role::whereNotIn('name',['admin'])->get();
+        $roles = Role::whereNotIn('name', ['admin', 'user'])->get();
         
         return view('auth.user.detail',compact('user','roles'));
     }
+
     public function store(Request $request)  {
         // return $request;
         $user=Auth()->user();
