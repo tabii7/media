@@ -10,12 +10,12 @@ class VendorController extends Controller
 {
     public function store(Request $request)
     {
-        $user = Auth::user();
-        $exists = Vendor::where('user_id', $user->id)->exists();
-        if ($exists) {
-            return redirect()->route('home');
+        $user=Auth()->user();   
+        $exists=Vendor::where('user_id',$user->id)->exists();
+        if($exists)
+        {
+            return to_route('home');
         }
-
         $request->validate([
             'shop_name' => 'required|string|max:255',
             'products' => 'required|string|max:255',
@@ -51,6 +51,12 @@ class VendorController extends Controller
             'time_of_availability' => $request->time_of_availability,
             'location' => $request->location,
         ]);
+
+        $user->assignRole('vendor');
+        $user->user_type='vendor';
+        $user->save();
+
+
 
         return redirect()->route('home')->with('success', 'Vendor created successfully.');
     }
