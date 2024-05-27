@@ -78,10 +78,6 @@ class ActorController extends Controller
             $file->move(public_path('video/user'), $filename);
             $user['video'] = 'video/user/' . $filename;
         }
-        
-        // return $user;
-        $user->assignRole($request->user_type);
-        $user->save();
     
         $user->assignRole('model');
         $user->user_type='model';
