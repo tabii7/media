@@ -106,7 +106,7 @@
                                         <p class="profile-detail-title fw-bold mb-2 mx-1 mx-md-3 mt-2 text-center">Profile
                                             Detail</p>
 
-                                        <form method="POST" action="{{ route('user.detail.store') }}"
+                                        <form method="POST" action="{{ route('actor.create') }}"
                                             enctype="multipart/form-data">
                                             @csrf
                                             <div class="row mb-2 mt-3">
@@ -469,6 +469,7 @@
                                                     @enderror
                                                 </div>
                                             </div>
+                                            
                                             <div class="row mt-3">
                                                 <div class=" col-md-10 m-auto">
                                                     <div class="d-flex justify-content-end">
