@@ -1,4 +1,3 @@
-
 @extends('admin.layout.app')
 
 
@@ -43,12 +42,30 @@
                     <div class="card">
                         <div class="rounded-top text-white d-flex flex-row" style="background-color: #000; height:200px;">
                             <div class="ms-4 mt-5 d-flex flex-column" style="width: 150px;">
-                                <img src="{{asset( $user->image ??'asset/images/avatar/1.jpg')}}" alt="Generic placeholder image"
-                                    class="img-fluid img-thumbnail mt-4 mb-2" style="width: 150px; z-index: 1">
-                                <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                                    style="z-index: 1;">
-                                    Edit profile
-                                </button>
+                                <img src="{{ asset($user->image ?? 'asset/images/avatar/1.jpg') }}"
+                                    alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
+                                    style="width: 150px; z-index: 1">
+                                @if (Auth::user()->hasRole('vendor'))
+                                  
+                                <a href="{{ route('vendor.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
+                                    Edit vendor
+                                </a>
+                                
+                               
+                                @elseif(Auth::user()->hasRole('model'))
+                                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                                        style="z-index: 1;">
+                                        Edit profile
+                                    </button>
+                                @elseif(Auth::user()->hasRole('writer'))
+                                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
+                                        style="z-index: 1;">
+                                        Edit profile
+                                    </button>
+                                @endif
+
+
+
                             </div>
                             <div class="ms-3" style="margin-top: 130px;">
                                 <h5>{{ $user->name }}</h5>
@@ -57,7 +74,7 @@
                         </div>
                         <div class="p-4 text-black" style="background-color: #f8f9fa;">
                             <div class="d-flex justify-content-end text-center py-1">
-                             
+
                                 {{-- <div>
                   <p class="mb-1 h5">478</p>
                   <p class="small text-muted mb-0">Following</p>
@@ -95,28 +112,28 @@
                                     @endforeach
                                 </div>
                             </div>
-                            @if($user->skills)
-                            <div class="mb-5">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <p class="lead fw-normal mb-0">Skills</p>
-                                </div>
-                                <div class="p-4" style="background-color: #f8f9fa;">
-                                    @php
-                                        $skills=json_decode($user->skills);
-                                    @endphp
-                                    <div class="row">
+                            @if ($user->skills)
+                                <div class="mb-5">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <p class="lead fw-normal mb-0">Skills</p>
+                                    </div>
+                                    <div class="p-4" style="background-color: #f8f9fa;">
+                                        @php
+                                            $skills = json_decode($user->skills);
+                                        @endphp
+                                        <div class="row">
 
-                                        @foreach ($skills as $skill)
-                                        <div class="col-md-2 ">
-                                            <span class="badge bg-primary px-2 py-1">
+                                            @foreach ($skills as $skill)
+                                                <div class="col-md-2 ">
+                                                    <span class="badge bg-primary px-2 py-1">
 
-                                                {{$skill}}
-                                            </span>
+                                                        {{ $skill }}
+                                                    </span>
+                                                </div>
+                                            @endforeach
                                         </div>
-                                        @endforeach
                                     </div>
                                 </div>
-                            </div>
                             @endif
                             <div class="d-flex justify-content-between align-items-center mb-4">
                                 <p class="lead fw-normal mb-0">Recent Update</p>
@@ -126,7 +143,7 @@
 
                                 <div class="col mb-2">
                                     <video src="{{ $user->video }}" class="w-100 rounded-3" controls></video>
-                                  
+
                                 </div>
                                 <div class="col mb-2">
                                     <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"

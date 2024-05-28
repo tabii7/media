@@ -86,4 +86,6 @@ Route::middleware(['auth.basic'])->group(function () {
     // routes for vendor
 
     Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');
+    Route::get('/vendor/edit', [VendorController::class, 'edit'])->name('vendor.edit');
+    Route::post('/vendor/update', [VendorController::class, 'update'])->name('vendor.update');
 });
