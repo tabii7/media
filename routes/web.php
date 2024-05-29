@@ -80,8 +80,9 @@ Route::middleware(['auth.basic'])->group(function () {
    
     
     Route::get('writer/create',[WriterController::class,'create'])->name('writer.create');
+    Route::get('/writer/edit', [WriterController::class, 'edit'])->name('writer.edit');
     Route::post('writer/store',[WriterController::class,'store'])->name('writer.store');
-
+    Route::post('/writer/update', [WriterController::class, 'update'])->name('writer.update');
 
     // routes for vendor
 
