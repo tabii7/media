@@ -53,10 +53,9 @@
                                 
                                
                                 @elseif(Auth::user()->hasRole('model'))
-                                    <button type="button" class="btn btn-outline-dark" data-mdb-ripple-color="dark"
-                                        style="z-index: 1;">
-                                        Edit profile
-                                    </button>
+                                <a href="{{ route('actor.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
+                                    Edit Profile
+                                </a>
                                 @elseif(Auth::user()->hasRole('writer'))
                                 <a href="{{ route('writer.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
                                     Edit Profile

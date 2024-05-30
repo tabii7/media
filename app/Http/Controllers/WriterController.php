@@ -90,7 +90,7 @@ class WriterController extends Controller
     public function update(Request $request)
     {
         $user=Auth()->user();   
-      
+       
         $writer = Writer::where('user_id', $user->id)->first();
 
         $request->validate([

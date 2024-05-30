@@ -76,8 +76,13 @@ Route::middleware(['auth.basic'])->group(function () {
     Route::get('user-experience/create',[ExperienceController::class,'create'])->name('experience.create');
     Route::post('user-experience/store',[ExperienceController::class,'store'])->name('experience.store');
 
+    ///routers for actor
+
     Route::post('actor/create',[ActorController::class,'store'])->name('actor.create');
-   
+    Route::get('/actor/edit', [ActorController::class, 'edit'])->name('actor.edit');
+    Route::post('/actor/update', [ActorController::class, 'update'])->name('actor.update');
+
+    // routes for writer
     
     Route::get('writer/create',[WriterController::class,'create'])->name('writer.create');
     Route::get('/writer/edit', [WriterController::class, 'edit'])->name('writer.edit');
