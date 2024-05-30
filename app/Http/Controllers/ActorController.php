@@ -6,6 +6,7 @@ use App\Models\Actor;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ActorController extends Controller
 {
@@ -88,8 +89,7 @@ class ActorController extends Controller
     
     public function update(Request $request)
     {
-       @dd($request->all());
-        $user = Auth::user();
+        $user=Auth()->user();   
         $Actor = Actor::where('user_id', $user->id)->first();
     
 
@@ -116,9 +116,8 @@ class ActorController extends Controller
             'skills'=>'required',
         ]);
     
-        $validated['user_id'] = $user->id;
-    
-        $Actor = Actor::update([
+        
+        $Actor->update([
             'age' => $request->age,
             'gender' => $request->gender,
             'pronouns' => $request->pronouns,
@@ -134,11 +133,6 @@ class ActorController extends Controller
             'relationship_status' => $request->relationship_status, // Fill in the actual value
             'occupation' => $request->occupation, // Fill in the actual value
             'residence' => $request->residence, // Fill in the actual value
-            'experience' => $request->experience, // Fill in the actual value
-            'short_video' => $request->short_video, // Fill in the actual value
-            'profile_picture' => $request->profile_picture, // Fill in the actual value
-            'user_type' => $request->user_type, // Fill in the actual value
-            'skills' => $request->skills, // Fill in the actual value
         ]);
         
         // Note: Replace the comments with appropriate values from your application.
@@ -152,17 +146,26 @@ class ActorController extends Controller
             $file = $request->file('profile_picture');
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('images/user'), $filename);
-            $user['image'] = 'images/user/' . $filename;
+            $userimage = 'images/user/' . $filename;
+            $user->update(['video'=> $userimage]);
         }
         if ($request->file('short_video')) {
             $file = $request->file('short_video');
             $filename = uniqid() . '.' . $file->getClientOriginalExtension();
             $file->move(public_path('video/user'), $filename);
-            $user['video'] = 'video/user/' . $filename;
+            $uservideo = 'video/user/' . $filename;
+            $user->update(['video'=> $uservideo]);
         }
     
+        $user->experience = $validated['experience'];
+        $user->skills = json_encode($validated['skills']);
        
-        $user->update();
+        $user->update(
+            [
+                'experience' => $validated['experience'],
+                'skills' =>  $validated['skills']
+            ]
+        );
     
         return redirect()->route('home')->with('success', 'Actor updated successfully.');
     }
@@ -179,12 +182,22 @@ class ActorController extends Controller
      * Show the form for editing the specified resource.
      */
     public function edit()
-    {
-        $user = Auth::user();
-        $Actor = Actor::where('user_id', $user->id)->firstOrFail();
+{
+    // Retrieve the authenticated user
+    $user = Auth::user();
 
-        return view('model.edit', compact('Actor'));
+    $Actor = DB::table('actors')
+        ->join('users', 'users.id', '=', 'actors.user_id')
+        ->where('actors.user_id', $user->id)
+        ->first();
+
+    if (!$Actor) {
+        return redirect()->back()->with('error', 'Actor not found.');
     }
+
+    return view('model.edit', compact('Actor'));
+}
+
 
     /**
      * Update the specified resource in storage.
