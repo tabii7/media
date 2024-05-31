@@ -1,16 +1,18 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ActorController;
-use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\VendorController;
+use App\Http\Controllers\WriterController;
 use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\ExperienceController;
-use App\Http\Controllers\Auth\UserDetailController;
-use App\Http\Controllers\WriterController;
 use App\Http\Controllers\Script\ScriptController;
-use App\Http\Controllers\VendorController;
+use App\Http\Controllers\Auth\UserDetailController;
 
-use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\PermissionController;
+use App\Http\Controllers\LocationVendor\LocationVendorController;
+use App\Http\Controllers\PropertyVendor\PropertyVendorController;
 
 /*
 |--------------------------------------------------------------------------
@@ -90,3 +92,50 @@ Route::middleware(['auth.basic'])->group(function () {
 
     Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');
 });
+
+
+
+
+
+
+
+
+// location and property vendor routes 
+
+Route::get('property-vendor/dashboard',[PropertyVendorController::class,'dashboard'])->name('property.vendor.listings');
+Route::get('property-vendor/listings',[PropertyVendorController::class,'index'])->name('property-vendor.listings');
+Route::get('property-vendor/create',[PropertyVendorController::class,'create'])->name('property.vendor.list.your.space');
+Route::post('property-vendor/store',[PropertyVendorController::class,'store'])->name('property.vendor.store');
+Route::get('property-vendor/view/{id}',[PropertyVendorController::class,'view'])->name('property.vendor.view');
+Route::get('property-vendor/edit/{id}',[PropertyVendorController::class,'edit'])->name('property.vendor.edit');
+Route::post('property-vendor/update/{id}',[PropertyVendorController::class,'update'])->name('property.vendor.update');
+Route::get('property-vendor/delete/{id}',[PropertyVendorController::class,'delete'])->name('property.vendor.delete');
+Route::post('/delete-property-image', [PropertyVendorController::class, 'deleteImage'])->name('delete.image');
+
+Route::get('property-vendor/booking',[PropertyVendorController::class,'propertyVendorBooking'])->name('property.vendor.booking');
+Route::get('property-vendor/booking-show',[PropertyVendorController::class,'propertyVendorBookingShow'])->name('property.vendor.booking.show');
+
+
+Route::get('/property-vendor/reviews', function () {
+    return view('property vendor.propertyReviews');
+})->name('property.vendor.reviews');
+
+
+
+
+Route::get('location-vendor/dashboard',[LocationVendorController::class,'dashboard'])->name('location.vendor.dashboard');
+Route::get('location-vendor/lisitngs',[LocationVendorController::class,'index'])->name('location.vendor.lisitngs');
+Route::get('location-vendor/create',[LocationVendorController::class,'create'])->name('location.vendor.list.your.space');
+Route::post('location-vendor/store',[LocationVendorController::class,'store'])->name('location.vendor.store');
+Route::get('location-vendor/view/{id}',[LocationVendorController::class,'view'])->name('location.vendor.view');
+Route::get('location-vendor/edit/{id}',[LocationVendorController::class,'edit'])->name('location.vendor.edit');
+Route::post('location-vendor/update/{id}',[LocationVendorController::class,'update'])->name('location.vendor.update');
+Route::get('location-vendor/delete/{id}',[LocationVendorController::class,'delete'])->name('location.vendor.delete');
+Route::post('/delete-image', [LocationVendorController::class, 'deleteImage'])->name('delete.image');
+Route::get('location-vendor/booking',[LocationVendorController::class,'locationVendorBooking'])->name('location.vendor.booking');
+Route::get('location-vendor/booking-show',[LocationVendorController::class,'locationVendorBookingShow'])->name('location.vendor.booking.show');
+
+ 
+Route::get('/location-vendor/reviews', function () {
+    return view('location vendor.locationReviews');
+})->name('location.vendor.reviews');
