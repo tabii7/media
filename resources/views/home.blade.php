@@ -1,5 +1,6 @@
 @extends('admin.layout.app')
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 
 @section('content')
     <style>
@@ -46,20 +47,19 @@
                                     alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                     style="width: 150px; z-index: 1">
                                 @if (Auth::user()->hasRole('vendor'))
-                                  
-                                <a href="{{ route('vendor.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
-                                    Edit vendor
-                                </a>
-                                
-                               
+                                    <a href="{{ route('vendor.edit') }}" class="btn btn-outline-dark"
+                                        data-mdb-ripple-color="dark" style="z-index: 1;">
+                                        Edit vendor
+                                    </a>
                                 @elseif(Auth::user()->hasRole('model'))
                                 <a href="{{ route('actor.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
                                     Edit Profile
                                 </a>
                                 @elseif(Auth::user()->hasRole('writer'))
-                                <a href="{{ route('writer.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
-                                    Edit Profile
-                                </a>
+                                    <a href="{{ route('writer.edit') }}" class="btn btn-outline-dark"
+                                        data-mdb-ripple-color="dark" style="z-index: 1;">
+                                        Edit Profile
+                                    </a>
                                 @endif
 
 
@@ -79,14 +79,15 @@
                 </div> --}}
                             </div>
                         </div>
-                        <div class="card-body p-4 text-black">
+                        <div class="card-body p-4 text-black mt-2">
                             <div class="mb-2">
                                 <div class="d-flex justify-content-between align-items-center">
                                     <p class="lead fw-normal mb-0">Experience</p>
                                     <p class="mb-0">
-                                        <a href="{{ route('experience.create') }}" class="text-muted">Add
-                                            Experience
+                                        <a href="{{ route('experience.create') }}" class="btn btn-outline-secondary">
+                                            <i class="fas fa-plus"></i>
                                         </a>
+
                                     </p>
                                 </div>
                                 <div class="p-4" style="background-color: #f8f9fa;">
@@ -98,11 +99,12 @@
                                                         class="rounded-3">
                                                 </div>
                                                 <div>
-                                                    <h3 class="text-capitalize mb-0">{{ $xp->job_title }}</h3>
-                                                    <p class="mb-0">{{ $xp->company_name }}</p>
-                                                    <p class="mb-0">{{ $xp->city }}</p>
-                                                    <p class="mb-0">{{ $xp->duration_from }} - {{ $xp->duration_to }}</p>
-                                                    <p class="font-italic mb-1">{{ $xp->description }}</p>
+                                                    <p class="text-capitalize mb-0">{{ $xp->job_title }}</p>
+                                                    <p class="mb-0">{{ $xp->company_name }},{{ $xp->city }}</p>
+                                                    <p class="mb-0"></p>
+                                                    <p class="mb-0">{{ $xp->duration_from }} - {{ $xp->duration_to }}
+                                                    </p>
+                                                    {{-- <p class="font-italic mb-1">{{ $xp->description }}</p> --}}
                                                 </div>
                                             </div>
                                         </div>
@@ -122,12 +124,14 @@
                                         <div class="row">
 
                                             @foreach ($skills as $skill)
-                                                <div class="col-md-2 ">
-                                                    <span class="badge bg-primary px-2 py-1">
-
-                                                        {{ $skill }}
-                                                    </span>
+                                                <div>
+                                                    <p class="text-capitalize mb-0">{{ $skill }}</p>
                                                 </div>
+                                                {{-- <div class="col-md-2 ">
+                                                    <span class="badge bg-primary px-2 py-1">
+                                                       {{ $skill }}
+                                                    </span>
+                                                </div> --}}
                                             @endforeach
                                         </div>
                                     </div>
