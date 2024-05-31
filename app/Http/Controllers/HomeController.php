@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -34,6 +35,11 @@ class HomeController extends Controller
         // {
         //     return to_route('auth.user.detail');
         // }
+
+        
+        if(Auth::user()->hasRole('admin')){
+            return view('adminhome',compact('user'));
+        }
 
         return view('home',compact('user'));
     }
