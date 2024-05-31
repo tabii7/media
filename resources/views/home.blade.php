@@ -47,10 +47,12 @@
                                     alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                     style="width: 150px; z-index: 1">
                                 @if (Auth::user()->hasRole('vendor'))
-                                    <a href="{{ route('vendor.edit') }}" class="btn btn-outline-dark"
-                                        data-mdb-ripple-color="dark" style="z-index: 1;">
-                                        Edit vendor
-                                    </a>
+
+                                <a href="{{ route('vendor.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
+                                    Edit vendor
+                                </a>
+
+
                                 @elseif(Auth::user()->hasRole('model'))
                                 <a href="{{ route('actor.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
                                     Edit Profile
