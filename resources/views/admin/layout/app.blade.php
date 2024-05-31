@@ -17,12 +17,27 @@
 	<title>Admin</title>
 	
 	<!-- FAVICONS ICON -->
-	<link rel="shortcut icon" type="image/png" href="images/favicon.png">
-	<link href="{{asset('asset/vendor/jquery-nice-select/css/nice-select.css')}}" rel="stylesheet">
-    <link href="{{asset('asset/css/style.css')}}" rel="stylesheet">
+    <link rel="shortcut icon" type="image/png" href="images/favicon.png">
+    <link href="{{ asset('asset/vendor/jquery-nice-select/css/nice-select.css') }}" rel="stylesheet">
+    <link href="{{ asset('asset/css/style.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     
+    <style>
+        /* Basic dropdown styles */
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.15);
+            border: 1px solid rgba(0,0,0,0.15);
+            z-index: 1000;
+        }
+        .dropdown-menu.show {
+            display: block;
+        }
+    </style>
 	
 </head>
 <body>
@@ -108,23 +123,23 @@
                                 </li>
                             @endif
                         @else
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }}
+                        <li class="nav-item dropdown">
+                            <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+                                {{ Auth::user()->name }}
+                            </a>
+                
+                            <div class="dropdown-menu dropdown-menu-end" style="margin-top:95px" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('logout') }}"
+                                   onclick="event.preventDefault();
+                                                 document.getElementById('logout-form').submit();">
+                                    {{ __('Logout') }}
                                 </a>
-
-                                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
-
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
+                
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                    @csrf
+                                </form>
+                            </div>
+                        </li>
                         @endguest
 						
                         
@@ -233,6 +248,24 @@
         Scripts
     ***********************************-->
     <!-- Required vendors -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var dropdownToggle = document.getElementById('navbarDropdown');
+            var dropdownMenu = document.querySelector('.dropdown-menu');
+
+            dropdownToggle.addEventListener('click', function (event) {
+                event.preventDefault();
+                dropdownMenu.classList.toggle('show');
+            });
+
+            // Close the dropdown if the user clicks outside of it
+            document.addEventListener('click', function (event) {
+                if (!dropdownToggle.contains(event.target) && !dropdownMenu.contains(event.target)) {
+                    dropdownMenu.classList.remove('show');
+                }
+            });
+        });
+    </script>
     <script src="{{asset('asset/vendor/global/global.min.js')}}"></script>
 	<script src="{{asset('asset/vendor/jquery-nice-select/js/jquery.nice-select.min.js')}}"></script>
     <script src="{{asset('asset/js/custom.min.js')}}"></script>
@@ -250,5 +283,6 @@
 
     @stack('custom-scripts')
     
+
 </body>
 </html>
