@@ -15,29 +15,11 @@
             background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
         }
     </style>
-    {{-- <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Dashboard') }}</div>
-
-                <div class="card-body">
-                    @if (session('status'))
-                        <div class="alert alert-success" role="alert">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    {{ __('You are logged in!') }}
-                </div>
-            </div>
-        </div>
-    </div>
-</div> --}}
+   
 
 
-    <section class="h-100 gradient-custom-2">
-        <div class="container py-5 h-100">
+    <section class=" ">
+        <div class="container py-5  ">
             <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-lg-9 col-xl-7">
                     <div class="card">
@@ -75,10 +57,6 @@
                         <div class="p-4 text-black" style="background-color: #f8f9fa;">
                             <div class="d-flex justify-content-end text-center py-1">
 
-                                {{-- <div>
-                  <p class="mb-1 h5">478</p>
-                  <p class="small text-muted mb-0">Following</p>
-                </div> --}}
                             </div>
                         </div>
                         <div class="card-body p-4 text-black mt-2">
@@ -146,7 +124,7 @@
                             <div class="row g-2">
 
                                 <div class="col mb-2">
-                                    <video src="{{ $user->video }}" class="w-100 rounded-3" controls></video>
+                                    <video src="{{ $user->video }}" class="w-100 h-70 rounded-3" controls></video>
 
                                 </div>
                                 <div class="col mb-2">
@@ -154,16 +132,7 @@
                                         alt="image 1" class="w-100 rounded-3">
                                 </div>
                             </div>
-                            {{-- <div class="row g-2">
-                <div class="col">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-                <div class="col">
-                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(114).webp"
-                    alt="image 1" class="w-100 rounded-3">
-                </div>
-              </div> --}}
+                     
                         </div>
                     </div>
                 </div>

@@ -170,11 +170,26 @@
                 <ul class="metismenu" id="menu">
 
 
-                    <li><a href="" class="ai-icon" aria-expanded="false">
+                    <li><a href="{{ route('home') }}" class="ai-icon" aria-expanded="false">
                             <i class="flaticon-013-checkmark"></i>
                             <span class="nav-text">Dashboard</span>
                         </a>
                     </li>
+                    @if (Auth::user()->hasrole('model'))
+                        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-025-dashboard"></i>
+                                <span class="nav-text">Calender</span>
+                            </a>
+                        </li>
+                    @endif
+                    @if (Auth::user()->hasrole('writer'))
+                        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                                <i class="flaticon-025-dashboard"></i>
+                                <span class="nav-text">Script Writing</span>
+                            </a>
+                        </li>
+                    @endif
+
 
                     @if (Auth::user()->hasrole('admin'))
                         <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
@@ -233,11 +248,11 @@
         <!--**********************************
             Footer start
         ***********************************-->
-        <div class="footer">
+        {{-- <div class="footer">
             <div class="copyright">
                 <p>Copyright © 2024</p>
             </div>
-        </div>
+        </div> --}}
         <!--**********************************
             Footer end
         ***********************************-->
