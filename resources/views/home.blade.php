@@ -51,7 +51,6 @@
                                     Edit vendor
                                 </a>
                                 
-                               
                                 @elseif(Auth::user()->hasRole('model'))
                                 <a href="{{ route('actor.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
                                     Edit Profile
