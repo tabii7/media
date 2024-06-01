@@ -54,8 +54,8 @@ class ActorController extends Controller
             'occupation' => 'required|string|max:255',
             'residence' => 'required|string|max:255',
             'experience'=>'required',
-            'short_video'=>'required|mimes:mp4,avi,wmv,mov|max:10240',
-            'profile_picture'=>'required|image',
+            'short_video.*'=>'required|mimes:mp4,avi,wmv,mov|max:10240',
+            'profile_picture.*'=>'required|image',
             'user_type'=>'required',
             'skills'=>'required',
         ]);
@@ -68,18 +68,30 @@ class ActorController extends Controller
         $user->experience=$request->experience;
         $user->skills=$request->skills;
 
-        if ($request->file('profile_picture')) {
-            $file = $request->file('profile_picture');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/user'), $filename);
-            $user['image'] = 'images/user/' . $filename;
+        if ($request->hasFile('profile_picture')) {
+            $profilePictures = $request->file('profile_picture');
+            $profilePicturePaths = [];
+        
+            foreach ($profilePictures as $file) {
+                $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('images/user'), $filename);
+                $profilePicturePaths[] = 'images/user/' . $filename;
+            }
+            $user['image'] = $profilePicturePaths;
         }
-        if ($request->file('short_video')) {
-            $file = $request->file('short_video');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('video/user'), $filename);
-            $user['video'] = 'video/user/' . $filename;
+        
+        if ($request->hasFile('short_video')) {
+            $shortVideos = $request->file('short_video');
+            $shortVideoPaths = [];
+        
+            foreach ($shortVideos as $file) {
+                $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('video/user'), $filename);
+                $shortVideoPaths[] = 'video/user/' . $filename;
+            }
+            $user['video'] = $shortVideoPaths;
         }
+        
 
         $user->assignRole('model');
         $user->user_type='model';
@@ -111,8 +123,8 @@ class ActorController extends Controller
             'occupation' => 'required|string|max:255',
             'residence' => 'required|string|max:255',
             'experience' => 'required|string|max:255',
-            'short_video' => 'nullable|mimes:mp4,avi,wmv,mov|max:10240',
-            'profile_picture' => 'nullable|image',
+            'short_video.*' => 'nullable|mimes:mp4,avi,wmv,mov|max:10240',
+            'profile_picture.*' => 'nullable|image',
             'skills' => 'required|array',
         ]);
 
@@ -136,22 +148,47 @@ class ActorController extends Controller
             'residence' => $request->residence,
         ]);
 
-
-        if ($request->file('profile_picture')) {
-            $file = $request->file('profile_picture');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('images/user'), $filename);
-            $userimage = 'images/user/' . $filename;
-            $user->forceFill(['image' => $userimage])->save();
+        if ($request->has('delete_profile_pictures')) {
+            foreach ($request->delete_profile_pictures as $imagePath) {
+                if (file_exists(public_path($imagePath))) {
+                    unlink(public_path($imagePath));
+                    // Remove from database attribute
+                    $user->image = array_diff($user->image, [$imagePath]);
+                }
+            }
+        }
+    
+        if ($request->has('delete_short_videos')) {
+            foreach ($request->delete_short_videos as $videoPath) {
+                if (file_exists(public_path($videoPath))) {
+                    unlink(public_path($videoPath));
+                    // Remove from database attribute
+                    $user->video = array_diff($user->video, [$videoPath]);
+                }
+            }
         }
 
-        if ($request->file('short_video')) {
-            $file = $request->file('short_video');
-            $filename = uniqid() . '.' . $file->getClientOriginalExtension();
-            $file->move(public_path('video/user'), $filename);
-            $uservideo = 'video/user/' . $filename;
-            $user->forceFill(['video' => $uservideo])->save();
+        if ($request->hasFile('profile_picture')) {
+            foreach ($request->file('profile_picture') as $file) {
+                $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('images/user'), $filename);
+                // Save file path in database attribute
+                $image[] = 'images/user/' . $filename;
+            }
+            $user->forceFill(['image' => $image])->save();
         }
+        
+        if ($request->hasFile('short_video')) {
+            foreach ($request->file('short_video') as $file) {
+                $filename = uniqid() . '.' . $file->getClientOriginalExtension();
+                $file->move(public_path('video/user'), $filename);
+                // Save file path in database attribute
+                $video[] = 'video/user/' . $filename;
+            }
+            $user->forceFill(['video' => $video])->save();
+        }
+
+    
 
        $user->update([
             'experience' => $validated['experience'],

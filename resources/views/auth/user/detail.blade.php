@@ -420,35 +420,34 @@
                                             <div class="row mb-2">
 
                                                 <div class="col-md-10 m-auto">
-                                                    <label for="profile_picture"
-                                                        class="col-form-label ">{{ __('Profile Picture') }}</label>
-                                                    <input id="profile_picture" accept="image/*" type="file"
-                                                        class="form-control @error('profile_picture') is-invalid @enderror"
-                                                        name="profile_picture" value="{{ old('profile_picture') }}"
-                                                        required>
-
-                                                    @error('profile_picture')
+                                                    <label for="profile_pictures" class="col-form-label">{{ __('Pictures') }}</label>
+                                                    <input id="profile_pictures" accept="image/*" type="file"
+                                                           class="form-control @error('profile_pictures') is-invalid @enderror"
+                                                           name="profile_picture[]" value="{{ old('profile_picture') }}" multiple required>
+                                                
+                                                    @error('profile_pictures')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
+                                                
                                             </div>
                                             <div class="row mb-2">
 
                                                 <div class="col-md-10 m-auto">
-                                                    <label for="short_video"
-                                                        class="col-form-label ">{{ __('Short Video') }}</label>
+                                                    <label for="short_video" class="col-form-label">{{ __('Short Videos') }}</label>
                                                     <input id="short_video" accept="video/*" type="file"
-                                                        class="form-control @error('short_video') is-invalid @enderror"
-                                                        name="short_video" value="{{ old('short_video') }}" required>
-
+                                                           class="form-control @error('short_video') is-invalid @enderror"
+                                                           name="short_video[]" value="{{ old('short_video') }}" multiple required>
+                                                
                                                     @error('short_video')
                                                         <span class="invalid-feedback" role="alert">
                                                             <strong>{{ $message }}</strong>
                                                         </span>
                                                     @enderror
                                                 </div>
+                                                
                                             </div>
                                             <div class="row ">
 
