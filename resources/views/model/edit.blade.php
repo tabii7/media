@@ -2,6 +2,15 @@
 
 @section('content')
 
+    <style>
+        .existing-file {
+           padding: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+    </style>
+
     <div class="col-md-10 col-lg-6 col-xl-8 vendor_profile profile_section hidden" data-role="vendor">
         <p class="profile-detail-title fw-bold mb-2 mx-1 mx-md-3 mt-2 text-center fs-5 ">Profile
             Detail</p>
@@ -261,18 +270,24 @@
                 <div class="col-md-10 m-auto">
                     <label for="profile_picture"
                         class="col-form-label fs-5 text-dark">{{ __('Profile Pictures') }}</label>
-                    @php
-                        $images = json_decode($Actor->image, true);
-                    @endphp
-                    @if (is_array($images))
-                        @foreach ($images as $image)
-                            <div class="existing-file">
-                                <img src="{{ asset($image) }}" alt="Profile Picture" width="100">
-                                <input type="checkbox" name="delete_profile_pictures[]" value="{{ $image }}">
-                                Delete
-                            </div>
-                        @endforeach
-                    @endif
+                    <div style="display:flex; gap:12px">
+                        @php
+                            $images = json_decode($Actor->image, true);
+                        @endphp
+                        @if (is_array($images))
+                            @foreach ($images as $image)
+                                <div class="existing-file">
+                                    <img src="{{ asset($image) }}" alt="Profile Picture" width="140" height="130" >
+                                    <div>
+                                        <input type="checkbox" name="delete_profile_pictures[]"
+                                            value="{{ $image }}">
+                                        Delete
+                                    </div>
+
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                     <input id="profile_picture" accept="image/*" type="file"
                         class="form-control @error('profile_picture') is-invalid @enderror" name="profile_picture[]"
                         multiple>
@@ -288,20 +303,26 @@
             <div class="row mb-2">
                 <div class="col-md-10 m-auto">
                     <label for="short_video" class="col-form-label fs-5 text-dark">{{ __('Short Videos') }}</label>
-                    @php
-                        $videos = json_decode(optional($Actor)->video, true);
-                    @endphp
-                    @if (is_array($videos))
-                        @foreach ($videos as $video)
-                            <div class="existing-file">
-                                <video width="320" height="240" controls>
-                                    <source src="{{ asset($video) }}" type="video/mp4">
-                                    Your browser does not support the video tag.
-                                </video>
-                                <input type="checkbox" name="delete_short_videos[]" value="{{ $video }}"> Delete
-                            </div>
-                        @endforeach
-                    @endif
+                    <div style="display:flex; gap:12px">
+                        @php
+                            $videos = json_decode(optional($Actor)->video, true);
+                        @endphp
+                        @if (is_array($videos))
+                            @foreach ($videos as $video)
+                                <div class="existing-file">
+                                    <video width="140" height="130" controls>
+                                        <source src="{{ asset($video) }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                    <div>
+                                        <input type="checkbox" name="delete_short_videos[]" value="{{ $video }}">
+                                    Delete
+                                    </div>
+                                    
+                                </div>
+                            @endforeach
+                        @endif
+                    </div>
                     <input id="short_video" accept="video/*" type="file"
                         class="form-control @error('short_video') is-invalid @enderror" name="short_video[]" multiple>
                     @error('short_video')
