@@ -37,15 +37,47 @@
 
 
     <section class="h-100 gradient-custom-2">
-        <div class="container py-5 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="container py-5 ">
+            <div class="row d-flex justify-content-center align-items-center ">
                 <div class="col col-lg-9 col-xl-7">
                     <div class="card">
-                        
-                  
+
+                        <div class="pieborder">
+
+                            <div id="pieChart"></div>
+
+                        </div>
+
+
+
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script>
+        var model = <?php echo json_encode($userCounts->where('user_type', 'model')->first()->count ?? 0); ?>;
+        var writer = <?php echo json_encode($userCounts->where('user_type', 'writer')->first()->count ?? 0); ?>;
+        var vendor = <?php echo json_encode($userCounts->where('user_type', 'vendor')->first()->count ?? 0); ?>;
+
+        var pieOptions = {
+            chart: {
+                type: 'pie'
+            },
+            series: [model, writer, vendor],
+            labels: ['Total Models', 'Total Writers', 'Total Vendor'],
+            dataLabels: {
+                enabled: true,
+                formatter: function(val, opts) {
+                    // Return the actual value from the series array
+                    return opts.w.config.series[opts.seriesIndex];
+                }
+            }
+        };
+
+
+        var pieChart = new ApexCharts(document.querySelector("#pieChart"), pieOptions);
+        pieChart.render();
+    </script>
 @endsection

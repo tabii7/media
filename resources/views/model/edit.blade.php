@@ -334,16 +334,17 @@
             </div>
 
 
-            <div class="row ">
-
+            <div class="row">
                 <div class="col-md-10 m-auto">
-                    <label for="skills" class="col-form-label  ">{{ __('Skills') }}</label>
-                    <select style=" width:100%" name="skills[]"
-                        class=" form-select js-example-tokenizer  @error('skills') is-invalid @enderror"
-                        value="{{ $Actor->skills }}" id="skills" required multiple="multiple">
-                        <option value="" disabled>Write and press enter</option>
+                    <label for="skills" class="col-form-label">{{ __('Skills') }}</label>
+                    <select style="width:100%" name="skills[]" class="form-select js-example-tokenizer @error('skills') is-invalid @enderror" id="skills" required multiple="multiple">
+                        @php
+                            $skills = json_decode($Actor->skills, true) ?? []; // Decode skills from JSON string, default to empty array if null
+                        @endphp
+                        @foreach($skills as $skill)
+                            <option value="{{ $skill }}" selected>{{ $skill }}</option>
+                        @endforeach
                     </select>
-
                     @error('skills')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -351,6 +352,7 @@
                     @enderror
                 </div>
             </div>
+            
 
             <div class="row mt-3">
                 <div class=" col-md-10 m-auto">

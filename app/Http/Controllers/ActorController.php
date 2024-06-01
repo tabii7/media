@@ -105,7 +105,7 @@ class ActorController extends Controller
         $loged = Auth()->user();
         $user = User::where('id', $loged->id)->first();
         $Actor = Actor::where('user_id', $loged->id)->first();
-
+       
         $validated = $request->validate([
             'age' => 'required|integer|min:0',
             'gender' => 'required|string|in:male,female,others',
@@ -203,10 +203,10 @@ class ActorController extends Controller
         }
 
 
-        $user->update([
+        $user->forceFill([
             'experience' => $validated['experience'],
             'skills' => $validated['skills'],
-        ]);
+        ])->save();
 
 
         return redirect()->route('home')->with('success', 'Actor updated successfully.');

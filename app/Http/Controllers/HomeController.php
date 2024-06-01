@@ -4,7 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use illuminate\Support\Facades\Auth;
-
+use App\Models\User;
+use illuminate\Support\Facades\DB;
 class HomeController extends Controller
 {
     /**
@@ -35,10 +36,14 @@ class HomeController extends Controller
         // {
         //     return to_route('auth.user.detail');
         // }
-
+        $userCounts = User::select('user_type', \DB::raw('count(*) as count'))
+                    ->whereNotIn('user_type', ['admin','null']) // Add your user types to exclude here
+                    ->groupBy('user_type')
+                    ->get();
         
+       
         if(Auth::user()->hasRole('admin')){
-            return view('adminhome',compact('user'));
+            return view('adminhome',compact('userCounts'));
         }
 
         return view('home',compact('user'));
