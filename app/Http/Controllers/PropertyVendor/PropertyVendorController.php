@@ -173,6 +173,11 @@ class PropertyVendorController extends Controller
     }
 
 
+    public function view($id){
+        $data = Property::findOrFail($id);
+        return view('property Vendor.viewProperty', compact('data'));
+
+    }
 
 
 }

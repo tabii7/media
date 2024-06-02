@@ -64,7 +64,7 @@
                             <button class="btnHover"
                                 style="border: 2px solid black; background: none; border-radius: 150px; padding: 5px 15px; font-weight: bold; font-size: 13px"
                                 onmouseover="this.style.border='2px solid #45a049'"
-                                onmouseout="this.style.border='2px solid black'"> <a href="{{ route('property.vendor.view', $item->id) }}"  class="text-decoration-none text-black"><i class="fa-solid fa-eye"></i>
+                                onmouseout="this.style.border='2px solid black'"> <a href="{{ route('location.vendor.view', $item->id) }}"  class="text-decoration-none text-black"><i class="fa-solid fa-eye"></i>
                                 View</a></button>
                     </div>
                 </div>
