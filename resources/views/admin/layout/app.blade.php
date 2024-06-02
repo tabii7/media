@@ -176,7 +176,7 @@
                         </a>
                     </li>
                     @if (Auth::user()->hasrole('model'))
-                        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <li><a href="{{ route('actor.calender') }}" class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                 <i class="flaticon-025-dashboard"></i>
                                 <span class="nav-text">Calender</span>
                             </a>
