@@ -21,7 +21,7 @@ class UserDetailController extends Controller
         
         return view('auth.user.detail',compact('user','roles'));
     }
-
+   //  for experience 
     public function store(Request $request)  {
         // return $request;
         $user=Auth()->user();

@@ -27,17 +27,17 @@
 
                                     <form method="POST" action="{{ route('experience.store') }}" enctype="multipart/form-data">
                                         @csrf
-            
-            
+
+
                                         <div class="row mb-3 ">
-                                            
+
                                             <div class="col-md-6 ">
                                                 <label for="name"
                                                     class=" col-form-label ">{{ __('Job Title') }}</label>
                                                 <input id="job_title" type="text"
                                                     class="form-control @error('job_title') is-invalid @enderror" name="job_title"
                                                     value="{{ old('job_title') }}" required autocomplete="name" autofocus>
-            
+
                                                 @error('job_title')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -50,77 +50,77 @@
                                                 <input id="company_name" type="text"
                                                     class="form-control @error('company_name') is-invalid @enderror" name="company_name"
                                                     value="{{ old('company_name') }}" required autocomplete="name" autofocus>
-            
+
                                                 @error('company_name')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
-                                            
+
                                             <div class="col-md-6">
                                                 <label for="company_logo"
                                                     class=" col-form-label ">{{ __('Company Logo') }}</label>
                                                 <input id="company_logo" accept="image/*" type="file"
                                                     class="form-control @error('company_logo') is-invalid @enderror"
                                                     name="company_logo" value="{{ old('company_logo') }}" required>
-            
+
                                                 @error('company_logo')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
-                                            
+
                                             <div class="col-md-6">
                                                 <label for="company_city"
                                                     class=" col-form-label ">{{ __('Company City') }}</label>
                                                 <input id="company_city" type="text"
                                                     class="form-control @error('company_city') is-invalid @enderror" name="company_city"
                                                     value="{{ old('company_city') }}" required>
-            
+
                                                 @error('company_city')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
-                                            
+
                                             <div class="col-md-6">
                                                 <label for="name"
                                                     class=" col-form-label ">{{ __('Duration From') }}</label>
                                                 <input id="duration_from" type="date"
                                                     class="form-control @error('duration_from') is-invalid @enderror" name="duration_from"
                                                     value="{{ old('duration_from') }}" required autocomplete="name" autofocus>
-            
+
                                                 @error('duration_from')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
-                                            
+
                                             <div class="col-md-6">
                                                 <label for="name"
                                                     class=" col-form-label ">{{ __('Duration To') }}</label>
-                                                <input id="duration_to" type="text"
+                                                <input id="duration_to" type="date"
                                                     class="form-control @error('duration_to') is-invalid @enderror" name="duration_to"
                                                     value="{{ old('duration_to') }}" required autocomplete="name" autofocus>
-            
+
                                                 @error('duration_to')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
                                                     </span>
                                                 @enderror
                                             </div>
-                                            
+
                                             <div class="col-md-12 m-auto">
                                                 <label for="name"
                                                     class=" col-form-label ">{{ __('Job Description') }}</label>
                                                 <textarea id="job_description" type="text"
                                                     class="form-control @error('job_description') is-invalid @enderror" name="job_description"
                                                     value="{{ old('job_description') }}" required autocomplete="name" autofocus></textarea>
-            
+
                                                 @error('job_description')
                                                     <span class="invalid-feedback" role="alert">
                                                         <strong>{{ $message }}</strong>
@@ -128,7 +128,7 @@
                                                 @enderror
                                             </div>
                                         </div>
-                                       
+
                                         <div class="row mb-0">
                                             <div class=" col-md-12 m-auto">
                                                 <div class="d-flex justify-content-between">
@@ -138,13 +138,13 @@
                                                 </div>
                                             </div>
                                         </div>
-            
-            
-            
+
+
+
                                     </form>
 
                                 </div>
-                                  
+
                             </div>
                         </div>
                     </div>

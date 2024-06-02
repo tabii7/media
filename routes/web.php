@@ -81,16 +81,26 @@ Route::middleware(['auth.basic'])->group(function () {
     Route::get('user-experience/create',[ExperienceController::class,'create'])->name('experience.create');
     Route::post('user-experience/store',[ExperienceController::class,'store'])->name('experience.store');
 
-    Route::get('actor/create',[ActorController::class,'create'])->name('actor.create');
-    Route::post('actor/post',[ActorController::class,'store'])->name('actor.post');
+    ///routers for actor
+
+    Route::post('actor/create',[ActorController::class,'store'])->name('actor.create');
+    Route::get('/actor/edit', [ActorController::class, 'edit'])->name('actor.edit');
+    Route::post('/actor/update', [ActorController::class, 'update'])->name('actor.update');
+
+    // routes for writer
     
     Route::get('writer/create',[WriterController::class,'create'])->name('writer.create');
+    Route::get('/writer/edit', [WriterController::class, 'edit'])->name('writer.edit');
     Route::post('writer/store',[WriterController::class,'store'])->name('writer.store');
-
+    Route::post('/writer/update', [WriterController::class, 'update'])->name('writer.update');
 
     // routes for vendor
 
     Route::post('/vendor/store', [VendorController::class, 'store'])->name('vendor.store');
+    Route::get('/vendor/edit', [VendorController::class, 'edit'])->name('vendor.edit');
+    Route::post('/vendor/update', [VendorController::class, 'update'])->name('vendor.update');
+});
+
 });
 
 
@@ -139,3 +149,4 @@ Route::get('location-vendor/booking-show',[LocationVendorController::class,'loca
 Route::get('/location-vendor/reviews', function () {
     return view('location vendor.locationReviews');
 })->name('location.vendor.reviews');
+
