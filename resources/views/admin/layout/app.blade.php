@@ -183,7 +183,7 @@
                         </li>
                     @endif
                     @if (Auth::user()->hasrole('writer'))
-                        <li><a class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
+                        <li><a href="{{ route('scripts.view') }}"class="has-arrow ai-icon" href="javascript:void()" aria-expanded="false">
                                 <i class="flaticon-025-dashboard"></i>
                                 <span class="nav-text">Script Writing</span>
                             </a>

@@ -15,7 +15,7 @@
             background: linear-gradient(to right, rgba(251, 194, 235, 1), rgba(166, 193, 238, 1))
         }
     </style>
-   
+
 
 
     <section class=" ">
@@ -29,16 +29,15 @@
                                     alt="Generic placeholder image" class="img-fluid img-thumbnail mt-4 mb-2"
                                     style="width: 150px; z-index: 1">
                                 @if (Auth::user()->hasRole('vendor'))
-
-                                <a href="{{ route('vendor.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
-                                    Edit vendor
-                                </a>
-
-
+                                    <a href="{{ route('vendor.edit') }}" class="btn btn-outline-dark"
+                                        data-mdb-ripple-color="dark" style="z-index: 1;">
+                                        Edit vendor
+                                    </a>
                                 @elseif(Auth::user()->hasRole('model'))
-                                <a href="{{ route('actor.edit') }}" class="btn btn-outline-dark" data-mdb-ripple-color="dark" style="z-index: 1;">
-                                    Edit Profile
-                                </a>
+                                    <a href="{{ route('actor.edit') }}" class="btn btn-outline-dark"
+                                        data-mdb-ripple-color="dark" style="z-index: 1;">
+                                        Edit Profile
+                                    </a>
                                 @elseif(Auth::user()->hasRole('writer'))
                                     <a href="{{ route('writer.edit') }}" class="btn btn-outline-dark"
                                         data-mdb-ripple-color="dark" style="z-index: 1;">
@@ -117,22 +116,42 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="d-flex justify-content-between align-items-center mb-4">
-                                <p class="lead fw-normal mb-0">Recent Update</p>
-                                <p class="mb-0"><a href="javascript:;" class="text-muted">Show all</a></p>
-                            </div>
-                            <div class="row g-2">
 
-                                <div class="col mb-2">
-                                    <video src="{{ $user->video }}" class="w-100 h-70 rounded-3" controls></video>
-
-                                </div>
-                                <div class="col mb-2">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(107).webp"
-                                        alt="image 1" class="w-100 rounded-3">
-                                </div>
+                            <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                <h3 class="lead fw-normal mb-0">Gallery</h3>
                             </div>
-                     
+
+                            <div class="container">
+                                <!-- Video Section -->
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h3 class="lead fw-normal mb-0">Videos</h3>
+                                </div>
+                                {{-- @php
+                                    $images = json_decode($user->image, true);
+                                @endphp --}}
+                                <div class="row mb-2">
+                                    {{-- @foreach ($videos as $video) --}}
+                                    <div class="col mb-2">
+                                        <video src="{{ $user->video }}" class="w-50 h-70 rounded-3" controls></video>
+                                    </div>
+                                    {{-- @endforeach --}}
+                                </div>
+
+                                <!-- Image Section -->
+                                <div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+                                    <h3 class="lead fw-normal mb-0">Images</h3>
+                                </div>
+                                {{-- @php
+                                    $images = json_decode($user->image, true);
+                                @endphp --}}
+                                {{-- <div class="row mb-2">
+                                    @foreach ($images as $image)
+                                        <div class="col mb-2">
+                                            <img src="{{ asset($image) }}" alt="Image" class="w-50 rounded-3">
+                                        </div>
+                                    @endforeach
+                                </div> --}}
+                            </div>
                         </div>
                     </div>
                 </div>
