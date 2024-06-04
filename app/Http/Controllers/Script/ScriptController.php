@@ -90,4 +90,28 @@ public function update_Script(Request $request){
 
 }
 
+public function edit_scene($scriptId, $sceneId){
+    $script = Script::findOrFail($scriptId);
+    $scene = Scene::findOrFail($sceneId);
+    return view('writer.edit_scene', compact('scene','script'));
+}
+
+public function update(Request $request, $scriptId, $sceneId)
+{
+    $request->validate([
+        'actors' => 'required|string',
+        'props' => 'required|string',
+        'scene' => 'required|string',
+    ]);
+
+    $scene = Scene::where('script_id', $scriptId)->findOrFail($sceneId);
+    $scene->actors = $request->input('actors');
+    $scene->props = $request->input('props');
+    $scene->scene = $request->input('scene');
+    $scene->save();
+
+    return redirect()->route('scripts.show', $scriptId)->with('success', 'Scene updated successfully');
+}
+
+
 }
