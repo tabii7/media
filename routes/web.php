@@ -35,7 +35,7 @@ Route::get('scenes', function () {
 });
 Route::get('script', function () {
     return view('writer.script');
-});
+})->name('script');
 
 
 Route::post('/scripts', [ScriptController::class, 'store'])->name('scripts.store');

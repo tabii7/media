@@ -73,6 +73,8 @@
 
         @if($scripts->isEmpty())
             <p>No scripts found.</p>
+            <a href="{{ route('script') }}" class="btn">Add Script</a>
+
         @else
             <div class="script-list">
                 @foreach($scripts as $script)
@@ -84,6 +86,10 @@
 
                         <!-- Example: Link to view script details -->
                         <a href="{{ route('scripts.show', $script->id) }}" class="btn">View Script</a>
+                        <a href="{{ route('script') }}" class="btn">Add Script</a>
+
+
+
                     </div>
                 @endforeach
             </div>
